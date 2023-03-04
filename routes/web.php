@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\Web\WebController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/')->group(function(){
+    Route::get('/',[WebController::class,'index'])->name('web.index');
+    Route::get('about',[WebController::class,'about'])->name('web.about');
+    Route::get('faq',[WebController::class,'faq'])->name('web.faq');
+    Route::get('contact',[WebController::class,'contact'])->name('web.contact');
 });
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
